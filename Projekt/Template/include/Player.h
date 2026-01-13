@@ -5,7 +5,7 @@
 
 class Player: public Sprite {
     public:
-    Player(std::string fileName) : Sprite(fileName,600, 500){}
+    Player(std::string fileName) : Sprite(fileName,cnts::gScreenWidth/2, cnts::gScreenHeight - 100 ){}
     void tick() override{};
 
     void onKeyDown(const SDL_Event &event) override;
@@ -15,4 +15,7 @@ class Player: public Sprite {
     void onCollisionWith(SpritePtr other) override;
     
     private:
+    int lives = 5;
+    bool gameOver = false;
+    void takeDamage();
 };
