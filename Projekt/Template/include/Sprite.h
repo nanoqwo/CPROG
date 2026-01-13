@@ -26,7 +26,7 @@ public:
     bool collidedWith(SpritePtr other) const;
 
     virtual void tick() = 0;
-    void move(int dx, int dy) { rect.x += dx; rect.y += dy; }
+    virtual void move(int dx, int dy) { rect.x += dx; rect.y += dy; }
 
     Sprite(const Sprite &other) = delete;
     const Sprite &operator=(const Sprite &other) = delete;
