@@ -1,11 +1,12 @@
 #pragma once
 #include "Sprite.h"
+#include "GameEngine.h"
+#include "Projectile.h"
 #include <string>
 #include <memory>
 
 class Enemy : public Sprite {
     public:
-        Enemy();
         Enemy(std::string name, float x, float y) : Sprite(name, x, y) {}
         
         void onCollisionWith(SpritePtr other) override;
