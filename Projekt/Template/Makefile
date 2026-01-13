@@ -41,7 +41,7 @@ LIBRARY_PATHS = -Llib -LC:/msys64/ucrt64/lib
 
 # LÄNKNING - objekfiler som används vid länkning. Enklare program utan SDL behöver normalt inte några speciella länk-flaggor
 # Default LINKER_FLAGS 
-LINKER_FLAGS =
+#LINKER_FLAGS =
 
 # Windows default LINKER_FLAGS to enable std::print (C++23)
 LINKER_FLAGS = -lstdc++exp

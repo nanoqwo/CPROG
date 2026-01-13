@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string>
 #include <memory>
 #include <SDL3/SDL.h>
 
