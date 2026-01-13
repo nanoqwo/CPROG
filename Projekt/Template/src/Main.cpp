@@ -5,11 +5,11 @@
 
 int main(){
 
-    SpritePtr sprites[]{new Enemy("football.png", 0, 0)};
+    SpritePtr sprites[]{SpritePtr(new Enemy("football.png", 0, 0))};
 
 
-
-    eng.add(SpritePtr(new Player("football.png")));
+    eng.add(SpritePtr(new Enemy("football.png", 0,0)));
+    eng.add(SpritePtr(new Player("Rocket.png")));
     eng.run();
     
     return 0;
