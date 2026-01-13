@@ -3,7 +3,7 @@
 
 class Projectile : public Sprite{
     public:
-    Projectile(int x) : Sprite("bullet.png", x, 400){}
+    Projectile(float x, float y) : Sprite("bullet.png", x, y) {}
 
     //TODO
     void tick() override{}
