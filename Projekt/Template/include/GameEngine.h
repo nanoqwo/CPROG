@@ -25,10 +25,12 @@ public:
     SDL_Window *getWin() const { return win; }
 
     SDL_Texture* loadTexture(const std::string& filename);
+    void setBackground(SDL_Texture* texture);
 
 private:
     SDL_Window *win;
     SDL_Renderer *ren;
+    SDL_Texture *background = nullptr;
     std::vector<SpritePtr> sprites, added, removed;
 
     bool running{ false };

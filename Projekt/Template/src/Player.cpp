@@ -7,7 +7,7 @@
 void Player::onKeyDown(const SDL_Event &event)
 {
     if(event.key.key == SDLK_SPACE){
-        SpritePtr bullet = SpritePtr(new Projectile(getRect().x, getRect().y));
+        SpritePtr bullet = SpritePtr(new Projectile(getRect().x + (getRect().w/2), getRect().y));
         eng.add(bullet);
     }
 }

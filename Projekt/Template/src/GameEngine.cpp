@@ -61,6 +61,11 @@ SDL_Texture* GameEngine::loadTexture(const std::string& filename)
     return texture;
 }
 
+void GameEngine::setBackground(SDL_Texture* texture) {
+    background = texture;
+}
+
+
 void GameEngine::add(SpritePtr spr) {
     added.push_back(spr);
 }
@@ -156,6 +161,11 @@ void GameEngine::render()
 {
     SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
     SDL_RenderClear(ren);
+
+    if(background){
+        SDL_RenderTexture(ren, background, NULL, NULL);
+    }
+
     for (SpritePtr spr : sprites)
     {
         spr->draw();
