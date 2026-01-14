@@ -3,6 +3,11 @@
 #include "Enemy.h"
 #include <vector>
 
+void initGame(){
+    std::vector<Sprite*> gameObjects;
+    
+}
+
 int main(){
 
     /*the game should be controlled by the player being alive or not, if the player dies the screen gets cleared and the game starts again
@@ -14,7 +19,7 @@ int main(){
     eng.add(SpritePtr(new Enemy("EnemyUfo.png", 20, 20)));
     eng.add(SpritePtr(new Enemy("EnemyPlane.png", cnts::gScreenWidth/2, 0)));
 
-    eng.add(SpritePtr(new Player("RocketColor.png")));
+    eng.add(SpritePtr(new Player()));
 
     eng.run();
     
