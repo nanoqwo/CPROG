@@ -4,15 +4,20 @@
 #include "projectile.h"
 #include <memory>
 
-/*void Player::tick() {
-
-}*/
+void Player::tick() {
+    if(coolDown>0) --coolDown;
+}
 
 void Player::onKeyDown(const SDL_Event &event)
 {
-    if(event.key.key == SDLK_SPACE){
-        SpritePtr bullet = SpritePtr(new Projectile(getRect().x + (getRect().w/2), getRect().y));
+    if(event.key.key == SDLK_SPACE && coolDown == 0){
+
+        int bulletX = getRect().x + getRect().w / 2;
+        int bulletY = getRect().y;
+        SpritePtr bullet = SpritePtr(new Projectile(bulletX, bulletY));
         eng.add(bullet);
+
+        coolDown = coolDownTimer;
     }
 }
 
@@ -32,21 +37,19 @@ void Player::onCollisionWith(SpritePtr other) {
     //dynamic pointer to either the enemy (instant gameover) or the bullet (--lives)
     if (std::dynamic_pointer_cast<Bullet>(other) && !gameOver){
         takeDamage();
-        if(gameOver) {
-            eng.remove(shared_from_this());
-            eng.showPopUp("Game Over", "You died!");
-        }
     } // if
     else if(std::dynamic_pointer_cast<Enemy>(other) && !gameOver){
-        eng.remove(shared_from_this());
-        eng.showPopUp("Game Over", "You died!");
+        takeDamage(lives);
     }
     
 }
 
-void Player::takeDamage() {
-    --lives;
+void Player::takeDamage(int damage) {
+    lives-=damage;
     if(lives == 0){
+        eng.remove(shared_from_this());
+        eng.clearScreen();
+        eng.showPopUp("Game Over", "You died!");
         gameOver = true;
     }
 }

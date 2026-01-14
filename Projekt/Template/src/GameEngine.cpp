@@ -46,6 +46,10 @@ GameEngine::~GameEngine()
     {
         SDL_DestroyWindow(win);
     }
+
+    if(background){
+        background = nullptr;
+    }
     SDL_Quit();
 }
 
@@ -65,8 +69,14 @@ void GameEngine::setBackground(SDL_Texture* texture) {
     background = texture;
 }
 
-void GameEngine::showPopUp(std::string title, std::string message) {
+void GameEngine::showPopUp(const std::string title, const std::string message) {
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, title.c_str(), message.c_str(), getWin());
+}
+
+void GameEngine::clearScreen() {
+    for(auto sprite: sprites){
+        remove(sprite);
+    }
 }
 
 void GameEngine::add(SpritePtr spr) {

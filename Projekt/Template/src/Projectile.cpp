@@ -11,6 +11,6 @@ void Projectile::tick() {
 
 void Projectile::onCollisionWith(SpritePtr other) {
     if(std::dynamic_pointer_cast<Enemy>(other)){
-
+        eng.remove(shared_from_this());
     }
 }
