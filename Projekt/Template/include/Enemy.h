@@ -1,27 +1,30 @@
 #pragma once
 #include "Sprite.h"
 #include "GameEngine.h"
-#include "Projectile.h"
+#include "Bullet.h"
 #include <string>
 #include <memory>
 
 class Enemy : public Sprite {
     public:
-        Enemy(std::string name, float x, float y) : Sprite(name, x, y) {}
+        Enemy(float x, float y) : Sprite("football.png", x, y) {}
         
         bool isDead() const { return dead; }
+        bool hitEdge() const { return hitRightEdge; }
 
         void onCollisionWith(SpritePtr other) override;
         void tick() override;
         void shoot();
 
     private: 
+        static bool hitRightEdge;
         bool dead = false;
         int direction = 1;
 
-        int reset = 300 + rand() % 120;
-        int timer = reset;         // individual timer for when enemy shoots
-        //static int globalTimer;  // global timer for enemies to keep track of when last enemy shot
+        int waitTime = resetWait;
+        int bulletTime = resetBullet;
 
+        int resetWait = 10;
+        int resetBullet = 1200 + rand() % 120;
 
 };
