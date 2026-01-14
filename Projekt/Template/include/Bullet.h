@@ -3,7 +3,7 @@
 
 class Bullet : public Sprite {
     public:
-        Bullet(float x, float y) : Sprite("football.png", x , y) {}
+        Bullet(float x, float y) : Sprite("Bullet.png", x , y) {}
 
         void tick() override;
 };
