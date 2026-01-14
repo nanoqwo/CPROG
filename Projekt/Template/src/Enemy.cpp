@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Projectile.h"
 #include "Player.h"
 #include "GameEngine.h"
 
@@ -8,13 +9,13 @@ using namespace std;
 bool Enemy::edgeHit     = false;
 int Enemy::direction    = 1;
 
-Enemy::Enemy(std::string& name, float x, float y) : Sprite(name, x, y)
+Enemy::Enemy(std::string name, float x, float y) : Sprite(name, x, y)
 {
     shootTimer = 100 + (rand() % (rand() % 300 - 100 + 1));
 }
 
 void Enemy::onCollisionWith(SpritePtr other) {
-    if (dynamic_pointer_cast<Player>(other)) {
+    if (dynamic_pointer_cast<Projectile>(other)) {
         float enemyBottom = getRect().y + getRect().h;
         float playerTop   = other->getRect().y;
 
@@ -35,8 +36,9 @@ void Enemy::tick() {
         move(0, getRect().h * 0.5f);
     }
 
-    if (getRect().y < 0){
-        eng.remove(shared_from_this());
+    if (edgeHit){
+        direction = -direction;
+        edgeHit = false;
     }
     
     if (shootTimer <= 0) {

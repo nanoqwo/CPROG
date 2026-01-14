@@ -3,7 +3,7 @@
 
 class Enemy : public Sprite {
     public:
-        Enemy(std::string& name, float x, float y);        
+        Enemy(std::string name, float x, float y);        
         void onCollisionWith(SpritePtr other) override;
         void tick() override;
         void shoot();
