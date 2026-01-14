@@ -52,11 +52,9 @@ void Enemy::tick() {
         edgeHit = false;
     }
     
-    //if (--shootTimer <= 0) {
-    if(static_cast<double>(rand()) / RAND_MAX < 0.005){
+    if (--shootTimer <= 0) {
         shoot();
-        shootTimer = 100 + (rand() % 201 - 100);
-        //shootTimer = 100 + (rand() % 300 - 100 + 1);
+        shootTimer = 100 + (rand() % 300 - 100 + 1);
     }
 }
 
