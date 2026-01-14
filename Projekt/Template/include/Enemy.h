@@ -9,13 +9,12 @@ class Enemy : public Sprite {
         void tick() override;
         void shoot();
 
-    private: 
-        int shootTimer;
-
         static bool toDrop;
-        static bool edgeHit;
-        static int direction;
-        static float drop;
-
-        static constexpr float WALL   = 10.0f;
+        static bool wallHitThisFrame;
+    private: 
+    static int direction;
+    static float drop;
+    
+    const float WALL   = 10.0f;
+    int shootTimer;
 };

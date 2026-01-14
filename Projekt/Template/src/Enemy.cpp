@@ -8,10 +8,10 @@ using namespace std;
 
 //TODO: Långsammare bevegelse, färre bullets
 
-bool Enemy::edgeHit     = false;
 int Enemy::direction    = 1;
 float Enemy::drop       = 0.5f;
 bool Enemy::toDrop = false;
+bool Enemy::wallHitThisFrame = false;
 
 Enemy::Enemy(std::string name, float x, float y) : Sprite(name, x, y)
 {
@@ -35,21 +35,20 @@ void Enemy::onCollisionWith(SpritePtr other) {
 }
 
 void Enemy::tick() {
-    if(toDrop) {move(0, getRect().h * drop); toDrop = false;}
+    //maybe possible to do it 
     move(5 * direction, 0);
 
-    bool hitLeftWall = getRect().x <= WALL;
-    bool hitRightWall = getRect().x + getRect().w >= cnts::gScreenWidth - WALL;
+    bool hitWall = getRect().x <= WALL || 
+        getRect().x + getRect().w >= cnts::gScreenWidth - WALL;
 
-    if (hitLeftWall || hitRightWall) {
-        edgeHit = true;
+    if (hitWall && !wallHitThisFrame) {
+        wallHitThisFrame = true;
         toDrop = true;
+        direction = -direction;
     }
 
-    if (edgeHit) {
+    if (toDrop) {
         move(0, getRect().h * drop);
-        direction = -direction;
-        edgeHit = false;
     }
     
     if (--shootTimer <= 0) {

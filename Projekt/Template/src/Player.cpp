@@ -7,6 +7,11 @@
 void Player::tick() {
     if(coolDown>0) --coolDown;
     damaged = false;
+
+    //remember that this bullshit is here
+    Enemy::toDrop = false;
+    Enemy::wallHitThisFrame = false;
+
 }
 
 void Player::onKeyDown(const SDL_Event &event)
