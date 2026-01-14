@@ -16,6 +16,7 @@ class Player: public Sprite {
     private:
     int lives = 5;
     bool gameOver = false;
+    bool damaged = false;
     int coolDown = 0;
     const int coolDownTimer = 30; 
     void takeDamage(int = 1);

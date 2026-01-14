@@ -35,23 +35,28 @@ void Enemy::onCollisionWith(SpritePtr other) {
 }
 
 void Enemy::tick() {
+    if(toDrop) {move(0, getRect().h * drop); toDrop = false;}
     move(5 * direction, 0);
 
-    if (getRect().x <= WALL || getRect().x + getRect().w >= cnts::gScreenWidth - WALL) {
+    bool hitLeftWall = getRect().x <= WALL;
+    bool hitRightWall = getRect().x + getRect().w >= cnts::gScreenWidth - WALL;
+
+    if (hitLeftWall || hitRightWall) {
         edgeHit = true;
+        toDrop = true;
     }
-    if(toDrop){ move(0, getRect().h * drop); toDrop = false;}
 
     if (edgeHit) {
         move(0, getRect().h * drop);
         direction = -direction;
         edgeHit = false;
-        toDrop = true;
     }
     
-    if (--shootTimer <= 0) {
+    //if (--shootTimer <= 0) {
+    if(static_cast<double>(rand()) / RAND_MAX < 0.005){
         shoot();
-        shootTimer = 100 + (rand() % 300 - 100 + 1);
+        shootTimer = 100 + (rand() % 201 - 100);
+        //shootTimer = 100 + (rand() % 300 - 100 + 1);
     }
 }
 

@@ -6,6 +6,7 @@
 
 void Player::tick() {
     if(coolDown>0) --coolDown;
+    damaged = false;
 }
 
 void Player::onKeyDown(const SDL_Event &event)
@@ -35,10 +36,15 @@ void Player::onKeyRight(const SDL_Event &event) {
 
 void Player::onCollisionWith(SpritePtr other) {
     //dynamic pointer to either the enemy (instant gameover) or the bullet (--lives)
-    if (std::dynamic_pointer_cast<Bullet>(other) && !gameOver){
+    if(gameOver || damaged) return;
+
+    if (std::dynamic_pointer_cast<Bullet>(other)){
         takeDamage();
+        damaged = true;
+
     } // if
-    else if(std::dynamic_pointer_cast<Enemy>(other) && !gameOver){
+
+    if(std::dynamic_pointer_cast<Enemy>(other)){
         takeDamage(lives);
     }
     
