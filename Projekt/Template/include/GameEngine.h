@@ -26,6 +26,7 @@ public:
 
     SDL_Texture* loadTexture(const std::string& filename);
     void setBackground(SDL_Texture* texture);
+    void showPopUp(std::string title, std::string message);
 
 private:
     SDL_Window *win;

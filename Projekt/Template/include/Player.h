@@ -1,7 +1,6 @@
 #pragma once
 #include "Sprite.h"
 #include "GameEngine.h"
-#include "projectile.h"
 
 class Player: public Sprite {
     public:

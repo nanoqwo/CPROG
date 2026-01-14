@@ -65,6 +65,9 @@ void GameEngine::setBackground(SDL_Texture* texture) {
     background = texture;
 }
 
+void GameEngine::showPopUp(std::string title, std::string message) {
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, title.c_str(), message.c_str(), getWin());
+}
 
 void GameEngine::add(SpritePtr spr) {
     added.push_back(spr);
