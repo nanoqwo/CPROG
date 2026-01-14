@@ -11,6 +11,7 @@ using namespace std;
 bool Enemy::edgeHit     = false;
 int Enemy::direction    = 1;
 float Enemy::drop       = 0.5f;
+bool Enemy::toDrop = false;
 
 Enemy::Enemy(std::string name, float x, float y) : Sprite(name, x, y)
 {
@@ -39,14 +40,16 @@ void Enemy::tick() {
     if (getRect().x <= WALL || getRect().x + getRect().w >= cnts::gScreenWidth - WALL) {
         edgeHit = true;
     }
+    if(toDrop){ move(0, getRect().h * drop); toDrop = false;}
 
     if (edgeHit) {
         move(0, getRect().h * drop);
         direction = -direction;
         edgeHit = false;
+        toDrop = true;
     }
     
-    if (--shootTimer) {
+    if (--shootTimer <= 0) {
         shoot();
         shootTimer = 100 + (rand() % 300 - 100 + 1);
     }

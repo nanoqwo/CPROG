@@ -12,6 +12,7 @@ class Enemy : public Sprite {
     private: 
         int shootTimer;
 
+        static bool toDrop;
         static bool edgeHit;
         static int direction;
         static float drop;
