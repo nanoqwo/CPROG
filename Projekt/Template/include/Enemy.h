@@ -10,10 +10,9 @@ class Enemy : public Sprite {
 
     private: 
         int shootTimer;
+
         static bool edgeHit;
         static int direction;
-        static float drop;
 
-        static constexpr float WALL   = 20.0f;
-        static constexpr float FLOOR  = 580.0f;
+        static constexpr float WALL   = 10.0f;
 };

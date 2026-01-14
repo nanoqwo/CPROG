@@ -6,4 +6,5 @@ class Bullet : public Sprite {
         Bullet(float x, float y) : Sprite("Bullet.png", x , y) {}
 
         void tick() override;
+        //void onCollisionWith(SpritePtr other) override;
 };

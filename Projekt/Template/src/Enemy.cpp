@@ -37,7 +37,7 @@ void Enemy::tick() {
         edgeHit = true;
     }
 
-    if (edgeHit){
+    if (edgeHit) {
         move(0, getRect().h * 0.5f);
         direction = -direction;
         edgeHit = false;
