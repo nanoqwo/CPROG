@@ -1,45 +1,56 @@
 #include "Enemy.h"
+#include "Bullet.h"
+#include "Player.h"
+#include "GameEngine.h"
 
 using namespace std;
 
-void Enemy::onCollisionWith(SpritePtr other)
+bool Enemy::edgeHit     = false;
+int Enemy::direction    = 1;
+
+Enemy::Enemy(std::string& name, float x, float y) : Sprite(name, x, y)
 {
-    if (dynamic_pointer_cast<Bullet>(other) && !dead){
-        eng.remove(shared_from_this());
-        dead = true;
+    shootTimer = 100 + (rand() % (rand() % 300 - 100 + 1));
+}
+
+void Enemy::onCollisionWith(SpritePtr other) {
+    if (dynamic_pointer_cast<Player>(other)) {
+        float enemyBottom = getRect().y + getRect().h;
+        float playerTop   = other->getRect().y;
+
+        if (enemyBottom >= playerTop) {
+            eng.remove(shared_from_this());               
+        }
     }
 }
 
 void Enemy::tick() {
-    if (waitTime > 0) {
-        --waitTime;
-        return;
-    } 
+    move(5 * direction, 0);
 
-    if (getRect().x <= 0 || getRect().x + getRect().w >= cnts::gScreenWidth) {
-        hitRightEdge = true;
+    if (getRect().x <= WALL || getRect().x + getRect().w >= cnts::gScreenWidth - WALL) {
+        edgeHit = true;
     }
 
-    if (hitRightEdge) {
-        direction = -direction;
-        move(0, static_cast<int>(getRect().h * 0.5f));
-    } else {
-        move(5*direction, 0);
+    if (edgeHit) {
+        move(0, getRect().h * 0.5f);
     }
 
-    if (bulletTime <= 0) {
-        shoot();
-        bulletTime = resetBullet;
+    if (getRect().y < 0){
+        eng.remove(shared_from_this());
     }
-    --bulletTime;
     
+    if (shootTimer <= 0) {
+        shoot();
+        shootTimer = 100 + (rand() % 300 - 100 + 1);
+    }
+    --shootTimer;
 }
 
 void Enemy::shoot()
 {
-    float posX = getRect().x + getRect().w / 2;
-    float posY = getRect().y + getRect().h;
+    float x = getRect().x + getRect().w / 2;
+    float y = getRect().y + getRect().h;
 
-    SpritePtr spr = SpritePtr(new Bullet(posX, posY));
+    SpritePtr spr = SpritePtr(new Bullet(x, y));
     eng.add(spr);
 }
