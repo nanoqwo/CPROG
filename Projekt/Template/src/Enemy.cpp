@@ -6,8 +6,11 @@
 
 using namespace std;
 
+//TODO: Långsammare bevegelse, färre bullets
+
 bool Enemy::edgeHit     = false;
 int Enemy::direction    = 1;
+float Enemy::drop       = 0.5f;
 
 Enemy::Enemy(std::string name, float x, float y) : Sprite(name, x, y)
 {
@@ -38,12 +41,12 @@ void Enemy::tick() {
     }
 
     if (edgeHit) {
-        move(0, getRect().h * 0.5f);
+        move(0, getRect().h * drop);
         direction = -direction;
         edgeHit = false;
     }
     
-    if (--shootTimer <= 0) {
+    if (--shootTimer) {
         shoot();
         shootTimer = 100 + (rand() % 300 - 100 + 1);
     }
