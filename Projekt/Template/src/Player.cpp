@@ -9,8 +9,8 @@ void Player::tick() {
     damaged = false;
 
     //remember that this bullshit is here
-    Enemy::toDrop = false;
-    Enemy::wallHitThisFrame = false;
+    /*Enemy::toDrop = false;
+    Enemy::wallHitThisFrame = false;*/
 
 }
 

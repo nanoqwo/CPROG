@@ -13,6 +13,7 @@ namespace constants
 	// PATH'S TO ALL YOUR EXTERNAL RESOURCES using 'gResPath'
 	const std::string bg_str  { gResPath + "images/bg.jpg" };
     const std::string sample_str { gResPath + "sounds/sample.wav"};
+    const std::string font_str { gResPath + "fonts/Jersey10.ttf"};
 }
 
 #endif
