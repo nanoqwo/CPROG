@@ -107,7 +107,7 @@ void GameEngine::renderText(const std::string text, int x, int y, int fontSize, 
     TTF_CloseFont(font);
 }
 
-void GameEngine::startScreen() {
+void GameEngine::startScreen(std::string text1, std::string text2) {
     SDL_Event event;
     bool waiting = true;
 
@@ -132,14 +132,14 @@ void GameEngine::startScreen() {
         }
 
         renderText(
-            "SPACE GAME",
+            text1,
             260, 200,
             58,
             {255, 255, 255, 255}
         );
 
         renderText(
-            "Press ENTER to Start",
+            text2,
             250, 340,
             36,
             {200, 200, 200, 255}
@@ -149,6 +149,49 @@ void GameEngine::startScreen() {
         SDL_Delay(16);
     }
 }
+/*
+void GameEngine::endScreen(std::string text1, std::string text2, bool over) {
+    SDL_Event event;
+    bool waiting = true;
+
+    while (waiting) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) {
+                running = false;
+                return;
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN &&
+                event.key.key == SDLK_RETURN) {
+                waiting = false;
+            }
+        }
+
+        SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+        SDL_RenderClear(ren);
+
+        if (background) {
+            SDL_RenderTexture(ren, background, nullptr, nullptr);
+        }
+
+        renderText(
+            text1,
+            260, 200,
+            58,
+            {255, 255, 255, 255}
+        );
+
+        renderText(
+            text2,
+            250, 340,
+            36,
+            {200, 200, 200, 255}
+        );
+
+        SDL_RenderPresent(ren);
+        SDL_Delay(16);
+    }
+}*/
 
 void GameEngine::clearScreen() {
     for(auto sprite: sprites){
@@ -156,9 +199,9 @@ void GameEngine::clearScreen() {
     }
 }
 
-void GameEngine::endScreen(std::string title, std::string context) {
+/*void GameEngine::endScreen(std::string title, std::string context) {
 
-}
+}*/
 
 void GameEngine::add(SpritePtr spr) {
     added.push_back(spr);

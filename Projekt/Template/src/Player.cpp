@@ -71,7 +71,7 @@ void Player::takeDamage(int damage) {
         eng.remove(shared_from_this());
         //eng.clearScreen();
         //eng.showPopUp("Game Over", "You died!");
-        eng.endScreen("Game Over", "You DIED");
+        //eng.endScreen("Game Over", "You DIED");
         gameOver = true;
     }
 
