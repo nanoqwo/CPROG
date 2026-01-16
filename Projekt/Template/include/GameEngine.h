@@ -30,7 +30,7 @@ public:
     void renderText(const std::string text, int x, int y, int fontSize, SDL_Color color);
     void clearScreen();
     void startScreen(std::string, std::string);
-    //void endScreen(std::string, std::string, bool);
+    void endScreen(std::string, std::string);
 
     bool done{ false };
 
