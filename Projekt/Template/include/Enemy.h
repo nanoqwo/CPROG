@@ -1,20 +1,22 @@
 #pragma once
 #include "Sprite.h"
+#include <vector>
 
 class Enemy : public Sprite {
     public:
         Enemy(std::string name, float x, float y);        
-        
-        void onCollisionWith(SpritePtr other) override;
-        void tick() override;
-        void shoot();
 
-        static bool toDrop;
-        static bool wallHitThisFrame;
-    private: 
-    static int direction;
-    static float drop;
-    
-    const float WALL   = 10.0f;
-    int shootTimer;
+        void tick() override;
+        void onCollisionWith(SpritePtr other) override;
+
+        void moveAll();
+
+    private:
+        int shootTimer;
+        bool alive;
+
+        static int direction;
+        static bool drop;
+        static int frames;
+        static std::vector<Enemy*> enemies;
 };

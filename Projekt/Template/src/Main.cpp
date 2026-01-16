@@ -9,11 +9,11 @@ void initGame(){
 
     gameObjects.push_back(new EnemyManager());
     gameObjects.push_back(new Player());
-    
+
     for(int i = 0; i < 3; ++i){
-        int y = 20 + i * 150;
+        int y = 20 + i * 120;
         for(int j = 0; j<4; ++j){
-            int x = 20 + j*150;
+            int x = 20 + j*120;
             if(i == 0) gameObjects.push_back(new Enemy("EnemyPlane.png",x, y));
             else if(i == 1) gameObjects.push_back(new Enemy("EnemyShip.png",x, y));
             else if(i == 2) gameObjects.push_back(new Enemy("EnemyUfo.png",x, y));
@@ -38,6 +38,7 @@ int main(){
 
     // eng.add(SpritePtr(new Player()));
 
+    eng.startScreen();
     initGame();
     eng.run();
     

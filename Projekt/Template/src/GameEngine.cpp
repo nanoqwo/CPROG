@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "Sprite.h"
 #include <SDL3_image/SDL_image.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include <iostream>
 
 GameEngine::GameEngine() : win(nullptr), ren(nullptr), running(false)
@@ -28,6 +29,11 @@ GameEngine::GameEngine() : win(nullptr), ren(nullptr), running(false)
         exit(EXIT_FAILURE);
     }
 
+    if (!TTF_Init()) {
+        std::cerr << "TTF_Init failed: " << SDL_GetError() << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
     SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
 }
 
@@ -50,6 +56,7 @@ GameEngine::~GameEngine()
     if(background){
         background = nullptr;
     }
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -71,6 +78,76 @@ void GameEngine::setBackground(SDL_Texture* texture) {
 
 void GameEngine::showPopUp(const std::string title, const std::string message) {
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_INFORMATION, title.c_str(), message.c_str(), getWin());
+}
+
+void GameEngine::renderText(const std::string text, int x, int y, int fontSize, SDL_Color color) {
+    TTF_Font* font = TTF_OpenFont(cnts::font_str.c_str(), fontSize);
+
+    if (!font) {
+        std::cerr << "Failed to load font\n";
+        return;
+    }
+
+    SDL_Surface* surface =
+        TTF_RenderText_Blended(font, text.c_str(), 0, color);
+
+    SDL_Texture* texture =
+        SDL_CreateTextureFromSurface(ren, surface);
+
+    SDL_FRect dst;
+    dst.x = (float)x;
+    dst.y = (float)y;
+    dst.w = (float)surface->w;
+    dst.h = (float)surface->h;
+
+    SDL_RenderTexture(ren, texture, nullptr, &dst);
+
+    SDL_DestroyTexture(texture);
+    SDL_DestroySurface(surface);
+    TTF_CloseFont(font);
+}
+
+void GameEngine::startScreen() {
+    SDL_Event event;
+    bool waiting = true;
+
+    while (waiting) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) {
+                running = false;
+                return;
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN &&
+                event.key.key == SDLK_RETURN) {
+                waiting = false;
+            }
+        }
+
+        SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+        SDL_RenderClear(ren);
+
+        if (background) {
+            SDL_RenderTexture(ren, background, nullptr, nullptr);
+        }
+
+        renderText(
+            "SPACE GAME",
+            260, 200,
+            58,
+            {255, 255, 255, 255}
+        );
+
+        renderText(
+            "Press ENTER to Start",
+            250, 340,
+            36,
+            {200, 200, 200, 255}
+        );
+
+        SDL_RenderPresent(ren);
+        SDL_Delay(16);
+    }
 }
 
 void GameEngine::clearScreen() {
