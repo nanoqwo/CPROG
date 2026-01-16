@@ -1,3 +1,0 @@
--checka game engine som vi har från Josef
--Sprite
--Speltyp -> basic shooter (som space shooter)

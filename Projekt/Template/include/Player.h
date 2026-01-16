@@ -17,7 +17,13 @@ class Player: public Sprite {
     int lives = 5;
     bool gameOver = false;
     bool damaged = false;
+
     int coolDown = 0;
     const int coolDownTimer = 30; 
+
+    int hurtTimer = 0;
+    const int hurtDuration = 11;
+
     void takeDamage(int = 1);
+
 };

@@ -156,6 +156,10 @@ void GameEngine::clearScreen() {
     }
 }
 
+void GameEngine::endScreen(std::string title, std::string context) {
+
+}
+
 void GameEngine::add(SpritePtr spr) {
     added.push_back(spr);
 }

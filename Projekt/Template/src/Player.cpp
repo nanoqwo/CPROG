@@ -6,8 +6,22 @@
 
 void Player::tick() {
     if(coolDown>0) --coolDown;
-    damaged = false;
+    
+    if(hurtTimer>0){
+        --hurtTimer;
+        
+        if (hurtTimer % 4 < 2){
+            changeImage("Rocket.png");
+        }else{
+            changeImage("RocketColor.png");
+        }
+        if(hurtTimer == 0){
+            changeImage("RocketColor.png");
+        }
+    }
 
+    
+    damaged = false;
 }
 
 void Player::onKeyDown(const SDL_Event &event)
@@ -55,8 +69,12 @@ void Player::takeDamage(int damage) {
     lives-=damage;
     if(lives == 0){
         eng.remove(shared_from_this());
-        eng.clearScreen();
-        eng.showPopUp("Game Over", "You died!");
+        //eng.clearScreen();
+        //eng.showPopUp("Game Over", "You died!");
+        eng.endScreen("Game Over", "You DIED");
         gameOver = true;
     }
+
+    hurtTimer = hurtDuration;
+    changeImage("Rocket.png");
 }

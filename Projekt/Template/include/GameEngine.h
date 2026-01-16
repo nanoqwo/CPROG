@@ -29,6 +29,7 @@ public:
     void showPopUp(const std::string title, const std::string message);
     void renderText(const std::string text, int x, int y, int fontSize, SDL_Color color);
     void startScreen();
+    void endScreen(std::string, std::string);
     void clearScreen();
 
 private:

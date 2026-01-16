@@ -12,6 +12,7 @@ public:
     virtual ~Sprite();
     void draw() const; // Inte virtual
     const SDL_FRect &getRect() const { return rect; }
+    void changeImage(std::string);
 
     //handle events
     virtual void onMouseDown(const SDL_Event &event) {}

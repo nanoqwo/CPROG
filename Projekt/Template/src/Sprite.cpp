@@ -27,6 +27,23 @@ void Sprite::draw() const
     SDL_RenderTexture(eng.getRen(), image, nullptr, &rect);
 }
 
+void Sprite::changeImage(std::string name) {
+    SDL_Texture* newImage = IMG_LoadTexture(eng.getRen(), (cnts::gResPath + "images/" + name).c_str());
+
+    if (!newImage) {
+        cerr << "No such file: " << name << endl;
+        exit(EXIT_FAILURE);
+    }
+    
+    SDL_DestroyTexture(image);
+    image = newImage;
+
+    rect.w = static_cast<float>(image->w); 
+    rect.h = static_cast<float>(image->h);
+    
+}
+
+
 bool Sprite::collidedWith(SpritePtr other) const
 {
     return SDL_HasRectIntersectionFloat(&rect, &other->rect);
