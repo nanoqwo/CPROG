@@ -259,6 +259,7 @@ void GameEngine::handleEvents()
         {
         case SDL_EVENT_QUIT:
             running = false;
+            done = true;
             break;
 
         case SDL_EVENT_KEY_DOWN:
