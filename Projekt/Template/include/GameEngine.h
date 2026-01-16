@@ -32,6 +32,8 @@ public:
     void endScreen(std::string, std::string);
     void clearScreen();
 
+    bool done{ false };
+
 private:
     SDL_Window *win;
     SDL_Renderer *ren;

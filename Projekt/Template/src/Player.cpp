@@ -69,8 +69,6 @@ void Player::takeDamage(int damage) {
     lives-=damage;
     if(lives == 0){
         eng.remove(shared_from_this());
-        //eng.clearScreen();
-        //eng.showPopUp("Game Over", "You died!");
         eng.endScreen("Game Over", "You DIED");
         gameOver = true;
     }

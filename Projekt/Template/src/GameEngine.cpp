@@ -115,6 +115,7 @@ void GameEngine::startScreen() {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_EVENT_QUIT) {
                 running = false;
+                done = true;
                 return;
             }
 
@@ -156,9 +157,61 @@ void GameEngine::clearScreen() {
     }
 }
 
-void GameEngine::endScreen(std::string title, std::string context) {
+void GameEngine::endScreen(std::string title, std::string context)
+{
+    SDL_Event event;
+    bool waiting = true;
 
+    // stop the game loop
+    running = false;
+
+    while (waiting)
+    {
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_EVENT_QUIT)
+            {
+                waiting = false;
+                done = true;
+                return;
+            }
+
+            if (event.type == SDL_EVENT_KEY_DOWN &&
+                event.key.key == SDLK_RETURN)
+            {
+                waiting = false;
+            }
+        }
+
+        SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+        SDL_RenderClear(ren);
+
+        if (background)
+        {
+            SDL_RenderTexture(ren, background, nullptr, nullptr);
+        }
+        
+        renderText(
+            title,
+            260, 200,
+            58,
+            {255, 255, 255, 255}
+        );
+        
+        renderText(
+            context,
+            260, 300,
+            36,
+            {200, 200, 200, 255}
+        );
+        renderText("Press ENTER to restart", 260, 380, 24, {200, 200, 200, 255});
+
+        clearScreen();
+        SDL_RenderPresent(ren);
+        SDL_Delay(16);
+    }
 }
+
 
 void GameEngine::add(SpritePtr spr) {
     added.push_back(spr);
