@@ -12,7 +12,7 @@ using namespace std;
 
 int Enemy::direction = 1;
 bool Enemy::drop = false;
-int Enemy::frames = 0;
+Uint32  Enemy::frame = 0;
 vector<Enemy*> Enemy::enemies;
 
 //every certain amount of frames, drop or move enemies
@@ -36,25 +36,16 @@ void Enemy::tick() {
         shootTimer = 200 + rand() % 500;
     }
 
-    //erm
-    frames++;
-    if (frames >= 30) {
-        frames = 0;
+    Uint32 currentFrame = SDL_GetTicks();
+
+    if (currentFrame - frame >= 30) {
         moveAll();
+        frame = currentFrame;
     }
 }
 
 void Enemy::moveAll() {
-    //remove dead enemies
-    for (size_t i = 0; i < enemies.size(); ) {
-        if (!enemies[i]->alive) {
-            enemies.erase(enemies.begin() + i);
-        } else {
-            ++i;
-        }
-    }
-
-    //player has cleared all enemies
+    //player has won
     if (enemies.empty()) { return; }
 
     for (Enemy* e : enemies) {
@@ -77,6 +68,15 @@ void Enemy::moveAll() {
 }
 
 void Enemy::onCollisionWith(SpritePtr other) {
+    //remove dead enemies
+    for (size_t i = 0; i < enemies.size(); ) {
+        if (!enemies[i]->alive) {
+            enemies.erase(enemies.begin() + i);
+        } else {
+            ++i;
+        }
+    }
+    
     if (dynamic_pointer_cast<Projectile>(other)) {
         alive = false;
         eng.remove(shared_from_this());
