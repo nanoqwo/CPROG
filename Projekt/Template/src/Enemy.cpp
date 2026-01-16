@@ -12,6 +12,7 @@ using namespace std;
 
 int Enemy::direction = 1;
 bool Enemy::drop = false;
+Uint32  Enemy::frame = 0;
 vector<Enemy*> Enemy::enemies;
 
 //every certain amount of frames, drop or move enemies
@@ -35,20 +36,20 @@ void Enemy::tick() {
         shootTimer = 200 + rand() % 500;
     }
 
-    //erm
-    frames++;
-    if (frames >= 30) {
-        frames = 0;
+    Uint32 currentFrame = SDL_GetTicks();
+
+    if (currentFrame - frame >= 30) {
         moveAll();
+        frame = currentFrame;
     }
 }
 
 void Enemy::moveAll() {
-    //player has cleared all enemies
+    //player has won
     if (enemies.empty()) { return; }
 
     for (Enemy* e : enemies) {
-        e->move(10 * direction, 0);
+        e->move(2 * direction, 0);
     }
 
     for (Enemy* e : enemies) {

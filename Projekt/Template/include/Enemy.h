@@ -17,6 +17,6 @@ class Enemy : public Sprite {
 
         static int direction;
         static bool drop;
-        int frames;
+        static Uint32 frame;
         static std::vector<Enemy*> enemies;
 };
