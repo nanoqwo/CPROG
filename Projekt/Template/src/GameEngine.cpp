@@ -231,27 +231,6 @@ void GameEngine::reset() {
 
 void GameEngine::handleEvents()
 {
-    /*while (SDL_PollEvent(&event)){
-        switch (event.type){
-            case SDL_EVENT_QUIT:
-                running = false; 
-                break;
-            case SDL_EVENT_MOUSE_BUTTON_DOWN:
-                for(SpritePtr spr : sprites)
-                    spr->onMouseDown(event);
-                break;
-            case SDL_EVENT_KEY_DOWN:
-                for (SpritePtr spr : sprites)
-                    spr->onKeyDown(event);
-                break;
-            case SDL_EVENT_KEY_UP:
-                for (SpritePtr spr : sprites)
-                    spr->onKeyUp(event);
-                break;
-        // Fler händelser utelämnade för minska kodmängden i exemplet
-        } // switch
-    } // while event */
-
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
