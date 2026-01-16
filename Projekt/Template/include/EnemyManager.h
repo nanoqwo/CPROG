@@ -7,7 +7,7 @@ public:
     EnemyManager() : Sprite("Bullet.png", -10, 0) {}
 
     void tick() override {
-        Enemy::toDrop = false;
-        Enemy::wallHitThisFrame = false;
+        // Enemy::toDrop = false;
+        // Enemy::wallHitThisFrame = false;
     }
 };

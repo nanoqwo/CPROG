@@ -14,9 +14,9 @@ void initGame(){
         int y = 20 + i * 120;
         for(int j = 0; j<4; ++j){
             int x = 20 + j*120;
-            if(i == 0) gameObjects.push_back(new Enemy("EnemyPlane.png",x, y));
-            else if(i == 1) gameObjects.push_back(new Enemy("EnemyShip.png",x, y));
-            else if(i == 2) gameObjects.push_back(new Enemy("EnemyUfo.png",x, y));
+            if(i == 0) gameObjects.push_back(new Enemy("EnemyPlaneColor.png",x, y));
+            else if(i == 1) gameObjects.push_back(new Enemy("EnemyShipColor.png",x, y));
+            else if(i == 2) gameObjects.push_back(new Enemy("EnemyUfoColor.png",x, y));
         }
     }
     for(auto sprite: gameObjects){
