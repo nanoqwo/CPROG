@@ -31,6 +31,7 @@ public:
     void clearScreen();
     void startScreen(std::string, std::string);
     void endScreen(std::string, std::string);
+    void reset();
 
     bool done{ false };
 

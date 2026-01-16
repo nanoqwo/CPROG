@@ -38,6 +38,7 @@ void Enemy::tick() {
 
     Uint32 currentFrame = SDL_GetTicks();
 
+
     if (currentFrame - frame >= 30) {
         moveAll();
         frame = currentFrame;
@@ -46,7 +47,9 @@ void Enemy::tick() {
 
 void Enemy::moveAll() {
     //player has won
-    if (enemies.empty()) { return; }
+    if (enemies.empty()) { 
+        return; 
+    }
 
     for (Enemy* e : enemies) {
         e->move(2 * direction, 0);
@@ -65,6 +68,15 @@ void Enemy::moveAll() {
             drop = false;
         }
     }
+}
+
+void Enemy::reset()
+{
+    Enemy::enemies.clear();
+    Enemy::direction = 1;
+    Enemy::drop = false;
+    Enemy::frame = 0;
+
 }
 
 void Enemy::onCollisionWith(SpritePtr other) {

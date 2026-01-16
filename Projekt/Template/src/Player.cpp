@@ -19,7 +19,6 @@ void Player::tick() {
             changeImage("RocketColor.png");
         }
     }
-
     
     damaged = false;
 }
@@ -70,6 +69,7 @@ void Player::takeDamage(int damage) {
     if(lives == 0){
         eng.remove(shared_from_this());
         eng.endScreen("Game Over", "You DIED");
+        Enemy::reset();
         gameOver = true;
     }
 

@@ -47,6 +47,7 @@ int main(){
     eng.startScreen("SPACE GAME", "Press ENTER to Start");
     while(!eng.done){
         eng.setBackground(eng.loadTexture(cnts::gResPath + "images/space_bg.png"));
+        eng.reset();
         initGame();
         eng.run();
     }

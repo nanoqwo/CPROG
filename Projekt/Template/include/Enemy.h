@@ -10,7 +10,8 @@ class Enemy : public Sprite {
         void onCollisionWith(SpritePtr other) override;
 
         void moveAll();
-
+        static void reset();
+        
     private:
         int shootTimer;
         bool alive;
