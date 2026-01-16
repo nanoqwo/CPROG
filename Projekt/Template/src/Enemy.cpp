@@ -83,6 +83,11 @@ void Enemy::onCollisionWith(SpritePtr other) {
 
     if (dynamic_pointer_cast<Projectile>(other)) {
         alive = false;
+        if(enemies.size() == 0){
+            eng.remove(shared_from_this());
+            Enemy::reset();    
+            eng.endScreen("Game Over", "You WON");
+        }
         eng.remove(shared_from_this());
     }
     
@@ -99,7 +104,6 @@ void Enemy::onCollisionWith(SpritePtr other) {
     //remove dead enemies
     for (size_t i = 0; i < enemies.size(); ) {
         if (!enemies[i]->alive) {
-            delete enemies[i];
             enemies.erase(enemies.begin() + i);
         } else {
             ++i;

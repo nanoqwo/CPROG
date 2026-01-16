@@ -4,14 +4,14 @@
 
 class Enemy : public Sprite {
     public:
-        Enemy(std::string name, float x, float y);        
+        Enemy(std::string name, float x, float y);
 
         void tick() override;
         void onCollisionWith(SpritePtr other) override;
 
         void moveAll();
         static void reset();
-        
+
     private:
         int shootTimer;
         bool alive;
