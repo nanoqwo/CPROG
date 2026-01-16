@@ -1,11 +1,13 @@
 #include "GameEngine.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "EnemyManager.h"
 #include <vector>
 
 void initGame(){
     std::vector<Sprite*> gameObjects;
 
+    gameObjects.push_back(new EnemyManager());
     gameObjects.push_back(new Player());
     
     for(int i = 0; i < 3; ++i){
