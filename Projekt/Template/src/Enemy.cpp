@@ -59,6 +59,7 @@ void Enemy::moveAll() {
         if (e->getRect().x <= 20 || e->getRect().x + e->getRect().w >= cnts::gScreenWidth - 20) {
             drop = true;
             direction = -direction;
+            break;
         }
     }
 

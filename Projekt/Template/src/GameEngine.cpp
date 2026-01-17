@@ -54,6 +54,7 @@ GameEngine::~GameEngine()
     }
 
     if(background){
+        SDL_DestroyTexture(background);
         background = nullptr;
     }
     TTF_Quit();

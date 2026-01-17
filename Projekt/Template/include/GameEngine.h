@@ -33,7 +33,7 @@ public:
     void endScreen(std::string, std::string);
     void reset();
 
-    bool done{ false };
+    bool isDone() { return done; }
 
 private:
     SDL_Window *win;
@@ -42,6 +42,7 @@ private:
     std::vector<SpritePtr> sprites, added, removed;
 
     bool running{ false };
+    bool done{ false };
 
     void handleEvents();
     void render();
