@@ -1,3 +1,4 @@
+#include "GameEngine.h"
 #include "Player.h"
 #include "Bullet.h"
 #include "Enemy.h"
@@ -11,12 +12,12 @@ void Player::tick() {
         --hurtTimer;
         
         if (hurtTimer % 4 < 2){
-            changeImage("Rocket.png");
+            changeImage(cnts::rocket_str);
         }else{
-            changeImage("RocketColor.png");
+            changeImage(cnts::rocketcolor_str);
         }
         if(hurtTimer == 0){
-            changeImage("RocketColor.png");
+            changeImage(cnts::rocketcolor_str);
         }
     }
     
@@ -74,5 +75,5 @@ void Player::takeDamage(int damage) {
     }
 
     hurtTimer = hurtDuration;
-    changeImage("Rocket.png");
+    changeImage(cnts::rocket_str);
 }

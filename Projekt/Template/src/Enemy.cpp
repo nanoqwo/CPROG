@@ -2,7 +2,6 @@
 #include "Bullet.h"
 #include "Projectile.h"
 #include "Player.h"
-#include "Constants.h"
 #include "GameEngine.h"
 
 using namespace std;
@@ -18,7 +17,7 @@ vector<Enemy*> Enemy::enemies;
 //every certain amount of frames, drop or move enemies
 //obs. frames needs to be changed to SDL_GetTciks() to behave according to time passed in-game
 
-Enemy::Enemy(std::string name, float x, float y) : Sprite(name, x, y)
+Enemy::Enemy(string name, float x, float y) : Sprite(name, x, y)
 {
     shootTimer = 200 + rand() % 500;
     alive = true;

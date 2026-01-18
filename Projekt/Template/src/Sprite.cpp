@@ -7,7 +7,7 @@ using namespace std;
 
 Sprite::Sprite(string name, float x, float y)
 {
-    image = IMG_LoadTexture(eng.getRen(), (cnts::gResPath + "images/" + name).c_str());
+    image = IMG_LoadTexture(eng.getRen(), (name).c_str());
     if (!image)
     {
         cerr << "No such file: " << name << endl;
@@ -28,7 +28,7 @@ void Sprite::draw() const
 }
 
 void Sprite::changeImage(std::string name) {
-    SDL_Texture* newImage = IMG_LoadTexture(eng.getRen(), (cnts::gResPath + "images/" + name).c_str());
+    SDL_Texture* newImage = IMG_LoadTexture(eng.getRen(), (name).c_str());
 
     if (!newImage) {
         cerr << "No such file: " << name << endl;

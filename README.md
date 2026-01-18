@@ -24,7 +24,7 @@ Spelet är ett 2D-spel inspirerat av Space Invaders. Spelaren styr ett rymdskepp
 - När spelaren trycker enter ska spelet ladda in spelaren med fem liv och ett visst antal fiender. 
 - Spelaren ska kunna röra sig genom att trycka vänster- och högerknapp på sitt tangetbord och skuta fiender genom att trycka mellanslagstangenten.
 - Målet med spelet är att skuta ner alla fiender innan spelaren förlorar alla fem liv. 
-- När spelaren antingen vunnit eller förlorat kan spelaren trycka enter för att starta om spelet, eller klicka X i fönstret hörn för att avsluta.
+- När spelaren antingen vunnit eller förlorat kan spelaren trycka enter för att starta om spelet, eller klicka X i fönstrets hörn för att avsluta.
 
 
 

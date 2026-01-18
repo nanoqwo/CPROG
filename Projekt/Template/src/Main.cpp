@@ -32,11 +32,11 @@ void initGame(){
             int x = 20 + j * 120;
 
             if(i == 0)
-                eng.add(std::make_shared<Enemy>("EnemyPlaneColor.png", x, y));
+                eng.add(std::make_shared<Enemy>(cnts::enemyplane_str, x, y));
             else if(i == 1)
-                eng.add(std::make_shared<Enemy>("EnemyShipColor.png", x, y));
+                eng.add(std::make_shared<Enemy>(cnts::enemyship_str, x, y));
             else
-                eng.add(std::make_shared<Enemy>("EnemyUfoColor.png", x, y));
+                eng.add(std::make_shared<Enemy>(cnts::enemyufo_str, x, y));
         }
     }
 }
@@ -46,7 +46,7 @@ int main(){
     
     eng.startScreen("SPACE GAME", "Press ENTER to Start");
     while(!eng.isDone()){
-        eng.setBackground(eng.loadTexture(cnts::gResPath + "images/space_bg.png"));
+        eng.setBackground(eng.loadTexture(cnts::bg_str));
         eng.reset();
         initGame();
         eng.run();

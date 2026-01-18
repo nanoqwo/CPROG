@@ -4,7 +4,7 @@
 
 class Player: public Sprite {
     public:
-    Player() : Sprite("RocketColor.png",cnts::gScreenWidth/2, cnts::gScreenHeight - 150 ){}
+    Player() : Sprite(cnts::rocketcolor_str, cnts::gScreenWidth/2, cnts::gScreenHeight - 150 ){}
     void tick() override;
 
     void onKeyDown(const SDL_Event &event) override;
